@@ -23,6 +23,7 @@ public:
 		string darkest_secret);
 	void	display_contact() const;
 	string	get_fname() const;
+	bool	is_empty() const;
 	string	get_lname() const;
 	string	get_nname() const;
 	string	get_number() const;

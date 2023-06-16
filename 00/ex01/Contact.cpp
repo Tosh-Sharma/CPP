@@ -39,8 +39,16 @@ string Contact::get_number() const
 
 void Contact::display_contact() const
 {
-	cout << "First Name: " << get_fname() << endl;
-	cout << "Last Name : " << get_lname() << endl;
-	cout << "Nick Name : " << get_nname() << endl;
-	cout << "Phone Num : " << get_number() << endl;
+	cout << "First Name		: " << get_fname() << endl;
+	cout << "Last Name		: " << get_lname() << endl;
+	cout << "Nick Name		: " << get_nname() << endl;
+	cout << "Phone Num 		: " << get_number() << endl;
+	cout << "Darkest Secret	: " << get_secret() << endl;
+}
+
+bool Contact::is_empty() const
+{
+	if (Contact::get_fname().length() > 0)
+		return (false);
+	return (true);
 }

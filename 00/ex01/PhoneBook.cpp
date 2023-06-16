@@ -56,19 +56,19 @@ string	PhoneBook::truncate_str(string str)
 	return (output);
 }
 
-/**
- * TODO: NEED A LOGIC TO STORE ELEMENTS and display them if they aren't empty
-*/
 void	PhoneBook::print_contacts()
 {
 	cout << "INDEX is " << index << endl;
 	cout << "     Index|first name| last name| nick name\n";
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < SIZE; ++i)
 	{
-		cout << setw(10) << i << "|" <<
+		if (contacts[i].is_empty() == false)
+		{
+			cout << setw(10) << i << "|" <<
 			truncate_str(contacts[i].get_fname()) << "|" <<
 			truncate_str(contacts[i].get_lname()) << "|" <<
 			truncate_str(contacts[i].get_nname()) << endl;
+		}
 	}
 }
 
@@ -78,14 +78,14 @@ void	PhoneBook::search_contact()
 	int		num;
 
 	print_contacts();
-	cout << "Enter index from 1 to 8 to retrieve data\n";
+	cout << "Enter index from 1 to " << SIZE << " to retrieve data\n";
 	while (1)
 	{
 		getline(cin, input);
 		try
 		{
 			num = std::stoi(input);
-			if (num > 8 || num < 1)
+			if (num > SIZE || num < 1)
 				std::cerr << "The index is outside of the range we have. Retry." << endl;
 			else
 			{
