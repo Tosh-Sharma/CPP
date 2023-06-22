@@ -1,10 +1,10 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-RM = rm -f
-NAME = phonebook
-SRCS = $(wildcard *.cpp)
+CC		= c++
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
+RM		= rm -f
+NAME	= output
+SRCS	= 	$(wildcard *.cpp)
 
-OBJS = ${SRCS:.cpp=.o}
+OBJS=${SRCS:.cpp=.o}
 
 all:    ${NAME}
 
