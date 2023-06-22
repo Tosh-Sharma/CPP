@@ -7,9 +7,9 @@ class HumanA
 {
 	private:
 		string	name;
-		Weapon	*type;
+		Weapon	&type;
 	public:
-		HumanA(string name, Weapon *type);
+		HumanA(string name, Weapon &type);
 		void	attack(void) const;
 		~HumanA();
 };

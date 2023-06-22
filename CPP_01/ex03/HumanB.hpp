@@ -10,7 +10,7 @@ class HumanB
 		Weapon*	type;
 	public:
 		HumanB(string name);
-		void	setWeapon(Weapon* type);
+		void	setWeapon(Weapon& type);
 		void	attack(void) const;
 		~HumanB();
 };
