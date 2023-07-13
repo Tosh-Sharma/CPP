@@ -4,11 +4,6 @@
 #include <iostream>
 #include <cmath>
 
-using	std::string;
-using	std::cout;
-using	std::endl;
-using	 std::ostream;
-
 class Fixed
 {
 	private:
@@ -27,6 +22,6 @@ class Fixed
 		void	setRawBits(const int value);
 };
 
-ostream&	operator<<(ostream &o, const Fixed& raw);
+std::ostream&	operator<<(std::ostream &o, const Fixed& raw);
 
 #endif

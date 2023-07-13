@@ -4,10 +4,6 @@
 #include <iostream>
 #include <cmath>
 
-using	std::string;
-using	std::cout;
-using	std::endl;
-using	 std::ostream;
 
 class Fixed
 {
@@ -51,6 +47,6 @@ class Fixed
 		static const Fixed& max(const Fixed&a, const Fixed& b);
 };
 
-ostream&	operator<<(ostream &o, const Fixed& raw);
+std::ostream&	operator<<(std::ostream &o, const Fixed& raw);
 
 #endif

@@ -2,30 +2,30 @@
 
 Fixed::Fixed(): n(0)
 {
-	cout << "Default constructor called" << endl;
+	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& value)
 {
-	cout << "Copy constructor called" << endl;
+	std::cout << "Copy constructor called" << std::endl;
 	this->n = value.n;
 }
 
 Fixed& Fixed::operator=(const Fixed& value)
 {
-	cout << "Copy assignment constructor called" << endl;
+	std::cout << "Copy assignment constructor called" << std::endl;
 	this->n = value.getRawBits();
 	return (*this);
 }
 
 Fixed::~Fixed()
 {
-	cout << "Destructor called" << endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const
 {
-	cout << "getRawBits member function called" << endl;
+	std::cout << "getRawBits member function called" << std::endl;
 	return this->n;
 }
 

@@ -4,11 +4,6 @@
 #include <string>
 #include <iostream>
 
-using	std::string;
-using	std::endl;
-using	std::cout;
-using	std::cin;
-
 class Harl
 {
 	private:
@@ -17,7 +12,7 @@ class Harl
 		void	info(void);
 		void	error(void);
 	public:
-		void	complain(string level);
+		void	complain(std::string level);
 };
 
 #endif

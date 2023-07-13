@@ -1,13 +1,13 @@
 #include "Zombie.hpp"
 
-Zombie	*zombieHorde(int N, string name);
+Zombie	*zombieHorde(int N, std::string name);
 
 void	dummy_code();
 int	main(void)
 {
-	cout << "Running dummy code"  << endl;
+	std::cout << "Running dummy code"  << std::endl;
 	dummy_code();
-	// Comment below line to test for leaks.
+	// Uncomment below line to test for leaks.
 	// system("leaks output");
 	return (0);
 }

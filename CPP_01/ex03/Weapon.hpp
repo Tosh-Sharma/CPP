@@ -4,19 +4,15 @@
 #include <iostream>
 #include <string>
 
-using	std::string;
-using	std::cout;
-using	std::endl;
-
 class Weapon
 {
 	private:
-		string	type;
+		std::string	type;
 
 	public:
-		Weapon(string type);
-		void	setType(string type);
-		string	getType() const;
+		Weapon(std::string type);
+		void	setType(std::string type);
+		std::string	getType() const;
 		~Weapon();
 };
 

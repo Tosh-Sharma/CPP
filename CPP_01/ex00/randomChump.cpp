@@ -1,6 +1,6 @@
 #include "Zombie.hpp"
 
-void	randomChump(string name)
+void	randomChump(std::string name)
 {
 	// If this is commented out, it causes
 	// leaks due to us losing reference of the

@@ -6,8 +6,8 @@ int main( void )
     Fixed b( a );
     Fixed c;
     c = b;
-    cout << a.getRawBits() << endl;
-    cout << b.getRawBits() << endl;
-    cout << c.getRawBits() << endl;
+    std::cout << a.getRawBits() << std::endl;
+    std::cout << b.getRawBits() << std::endl;
+    std::cout << c.getRawBits() << std::endl;
     return 0;
 }

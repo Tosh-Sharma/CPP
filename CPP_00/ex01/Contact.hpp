@@ -4,30 +4,26 @@
 #include <string>
 #include <iostream>
 
-using std::string;
-using std::cout;
-using std::endl;
-
 class Contact
 {
 private:
-	string			first_name;
-	string			last_name;
-	string			nick_name;
-	string			phone_number;
-	string			darkest_secret;
+	std::string			first_name;
+	std::string			last_name;
+	std::string			nick_name;
+	std::string			phone_number;
+	std::string			darkest_secret;
 	
 public:
-	int	set_contact(string first_name, string last_name,
-		string nick_name, string phone_number, 
-		string darkest_secret);
+	int	set_contact(std::string first_name, std::string last_name,
+		std::string nick_name, std::string phone_number, 
+		std::string darkest_secret);
 	void	display_contact() const;
-	string	get_fname() const;
+	std::string	get_fname() const;
 	bool	is_empty() const;
-	string	get_lname() const;
-	string	get_nname() const;
-	string	get_number() const;
-	string	get_secret() const;
+	std::string	get_lname() const;
+	std::string	get_nname() const;
+	std::string	get_number() const;
+	std::string	get_secret() const;
 };
 
 #endif

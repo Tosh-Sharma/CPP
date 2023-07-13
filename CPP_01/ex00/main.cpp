@@ -1,7 +1,7 @@
 #include "Zombie.hpp"
 
-void	randomChump(string name);
-Zombie	*newZombie(string name);
+void	randomChump(std::string name);
+Zombie	*newZombie(std::string name);
 /**
  * In the below code, there shall be no leaks until
  * line 9-10 containing the heap_zombie declaration

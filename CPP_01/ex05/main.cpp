@@ -5,13 +5,13 @@ int	main(int argc, char **argv)
     Harl Harl;
 
     Harl.complain("debug");
-	cout << "\n";
+	std::cout << "\n";
     Harl.complain("info");
-    cout << "\n";
+    std::cout << "\n";
 	Harl.complain("warning");
-    cout << "\n";
+    std::cout << "\n";
 	Harl.complain("error");
-	cout << "\n";
+	std::cout << "\n";
     Harl.complain("no");
 	return (0);
 }

@@ -1,8 +1,8 @@
 #include "Contact.hpp"
 
-int	Contact::set_contact(string first_name,
-	string last_name, string nick_name,
-	string phone_number, string darkest_secret)
+int	Contact::set_contact(std::string first_name,
+	std::string last_name, std::string nick_name,
+	std::string phone_number, std::string darkest_secret)
 {
 	this->first_name = first_name;
 	this->last_name = last_name;
@@ -12,38 +12,38 @@ int	Contact::set_contact(string first_name,
 	return (0);
 };
 
-string Contact::get_fname() const
+std::string Contact::get_fname() const
 {
 	return this->first_name;
 }
 
-string Contact::get_lname() const
+std::string Contact::get_lname() const
 {
 	return this->last_name;
 }
 
-string Contact::get_nname() const
+std::string Contact::get_nname() const
 {
 	return this->nick_name;
 }
 
-string Contact::get_secret() const
+std::string Contact::get_secret() const
 {
 	return this->darkest_secret;
 }
 
-string Contact::get_number() const
+std::string Contact::get_number() const
 {
 	return this->phone_number;
 }
 
 void Contact::display_contact() const
 {
-	cout << "First Name		: " << get_fname() << endl;
-	cout << "Last Name		: " << get_lname() << endl;
-	cout << "Nick Name		: " << get_nname() << endl;
-	cout << "Phone Num 		: " << get_number() << endl;
-	cout << "Darkest Secret	: " << get_secret() << endl;
+	std::cout << "First Name		: " << get_fname() << std::endl;
+	std::cout << "Last Name		: " << get_lname() << std::endl;
+	std::cout << "Nick Name		: " << get_nname() << std::endl;
+	std::cout << "Phone Num 		: " << get_number() << std::endl;
+	std::cout << "Darkest Secret	: " << get_secret() << std::endl;
 }
 
 bool Contact::is_empty() const

@@ -4,19 +4,15 @@
 #include <iostream>
 #include <string>
 
-using std::string;
-using std::cout;
-using std::endl;
-
 class Zombie
 {
 	private:
-		string	name;
+		std::string	name;
 	public:
 		Zombie();
-		Zombie(string name);
+		Zombie(std::string name);
 		~Zombie();
-		void	set_zombie_name(string name);
+		void	set_zombie_name(std::string name);
 		void	announce(void) const;
 };
 

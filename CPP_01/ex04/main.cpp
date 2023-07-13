@@ -3,16 +3,8 @@
 #include <fstream>
 #include <string>
 
-using	std::string;
-using	std::getline;
-using	std::cin;
-using	std::ifstream;
-using	std::ofstream;
-using	std::cout;
-using	std::endl;
-
 /**
- * Use below line to test code using sample.txt 
+ * Use below line to test code with "sample.txt" file
  * and "Hello World" as input string to replace.
 	make && ./output sample.txt "Hello World" "YO"
 */
@@ -28,17 +20,17 @@ using	std::endl;
  * Then try to find another occurence after that
  * Repeat the same process again and again.
 */
-void	write_to_file(string outputFileData, string outputFileName)
+void	write_to_file(std::string outputFileData, std::string outputFileName)
 {
-	ofstream outputFile(outputFileName);
+	std::ofstream outputFile(outputFileName);
 
 	outputFile << outputFileData;
 	outputFile.close();
 }
 
-string	find_and_replace(string inputFileData, string s1, string s2)
+std::string	find_and_replace(std::string inputFileData, std::string s1, std::string s2)
 {
-	string outputString;
+	std::string outputString;
 	int	start = 0;
 	int	position;
 	int	length;
@@ -62,15 +54,15 @@ string	find_and_replace(string inputFileData, string s1, string s2)
 	return outputString;
 }
 
-string	read_from_input(string inputFileName)
+std::string	read_from_input(std::string inputFileName)
 {
-	string		fileData;
-	ifstream	inputFile(inputFileName);
+	std::string		fileData;
+	std::ifstream	inputFile(inputFileName);
 
 	if (inputFile.is_open())
 	{
-		string	temp;
-		while (getline(inputFile, temp))
+		std::string	temp;
+		while (std::getline(inputFile, temp))
 		{
 			fileData += temp;
 			fileData+= '\n';
@@ -79,7 +71,7 @@ string	read_from_input(string inputFileName)
 	}
 	else
 	{
-		cout << "Error in opening file" << endl;
+		std::cout << "Error in opening file" << std::endl;
 		return (NULL);
 	}
 	return (fileData);
@@ -89,17 +81,17 @@ int	main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		cout << "Need to pass 3 parameters" << endl;
+		std::cout << "Need to pass 3 parameters" << std::endl;
 		return (1);
 	}
 	else if (argc == 4)
 	{
-		string	inputFileName;
-		string	s1;
-		string	s2;
-		string	outputFileName;
-		string	inputFileData;
-		string	outputFileData;
+		std::string	inputFileName;
+		std::string	s1;
+		std::string	s2;
+		std::string	outputFileName;
+		std::string	inputFileData;
+		std::string	outputFileData;
 
 		inputFileName = argv[1];
 		s1 = argv[2];

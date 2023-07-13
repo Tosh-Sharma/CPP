@@ -1,23 +1,19 @@
 #include <iostream>
 #include <string>
 
-using	std::string;
-using	std::cout;
-using	std::endl;
-
 int	main(void)
 {
-	string	str = "HI THIS IS BRAIN";
-	string	*stringPTR = &str;
-	string	&stringREF = str;
+	std::string	str = "HI THIS IS BRAIN";
+	std::string	*stringPTR = &str;
+	std::string	&stringREF = str;
 
-	cout << "Memory Addresses of the variables\n";
-	cout << "Original String's address is " << (void *)&str << endl;
-	cout << "String Pointer's address is  " << (void *)&stringPTR << endl;
-	cout << "String reference's address is " << (void *)&stringREF << endl;
+	std::cout << "Memory Addresses of the variables\n";
+	std::cout << "Original String's address is " << (void *)&str << std::endl;
+	std::cout << "String Pointer's address is  " << (void *)&stringPTR << std::endl;
+	std::cout << "String reference's address is " << (void *)&stringREF << std::endl;
 
-	cout << "Values of the variables\n";
-	cout << "Original String's address is " << str << endl;
-	cout << "String Pointer's address is  " << *stringPTR << endl;
-	cout << "String reference's address is " << stringREF << endl;
+	std::cout << "Values of the variables\n";
+	std::cout << "Original String's address is " << str << std::endl;
+	std::cout << "String Pointer's address is  " << *stringPTR << std::endl;
+	std::cout << "String reference's address is " << stringREF << std::endl;
 }
