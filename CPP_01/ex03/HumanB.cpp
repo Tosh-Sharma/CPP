@@ -1,6 +1,6 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(string name): name(name), type(NULL) {}
+HumanB::HumanB(std::string name): name(name), type(NULL) {}
 
 void	HumanB::setWeapon(Weapon& type)
 {

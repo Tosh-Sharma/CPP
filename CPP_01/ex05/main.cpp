@@ -2,16 +2,16 @@
 
 int	main(int argc, char **argv)
 {
-    Harl Harl;
+	Harl Harl;
 
-    Harl.complain("debug");
+	Harl.complain("debug");
 	std::cout << "\n";
-    Harl.complain("info");
-    std::cout << "\n";
+	Harl.complain("info");
+	std::cout << "\n";
 	Harl.complain("warning");
-    std::cout << "\n";
+	std::cout << "\n";
 	Harl.complain("error");
 	std::cout << "\n";
-    Harl.complain("no");
+	Harl.complain("no");
 	return (0);
 }

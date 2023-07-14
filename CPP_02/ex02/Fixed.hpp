@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cmath>
 
-
 class Fixed
 {
 	private:

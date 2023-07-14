@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 				c = (char)std::toupper(str[j]);
 				std::cout << c;
 			}
-			std::cout << " ";
 		}
 	}
 	return (0);

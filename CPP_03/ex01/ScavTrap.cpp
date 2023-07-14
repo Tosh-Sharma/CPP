@@ -1,5 +1,13 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(): ClapTrap()
+{
+	std::cout << "Default construtor for ScavTrap has been called." << std::endl;
+	this->attackDamage = 20;
+	this->energyPoints = 50;
+	this->hitPoints = 100;
+}
+
 ScavTrap::~ScavTrap()
 {
 	std::cout << "Destructor for ScavTrap " << this->getName()
@@ -12,6 +20,19 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 	this->attackDamage = 20;
 	this->energyPoints = 50;
 	this->hitPoints = 100;
+}
+
+ScavTrap::ScavTrap(ScavTrap const &rhs): ClapTrap(rhs)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	*this = rhs;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& other)
+{
+	std::cout << "Copy assignment constructor called for ScavTrap" << std::endl;
+	ClapTrap::operator=(other);
+	return (*this);
 }
 
 void	ScavTrap::guardGate()

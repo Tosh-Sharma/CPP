@@ -13,7 +13,7 @@ int	main(void)
 	std::cout << "String reference's address is " << (void *)&stringREF << std::endl;
 
 	std::cout << "Values of the variables\n";
-	std::cout << "Original String's address is " << str << std::endl;
-	std::cout << "String Pointer's address is  " << *stringPTR << std::endl;
-	std::cout << "String reference's address is " << stringREF << std::endl;
+	std::cout << "Original String's value is " << str << std::endl;
+	std::cout << "String Pointer's value is  " << *stringPTR << std::endl;
+	std::cout << "String reference's value is " << stringREF << std::endl;
 }

@@ -72,7 +72,7 @@ std::string	read_from_input(std::string inputFileName)
 	else
 	{
 		std::cout << "Error in opening file" << std::endl;
-		return (NULL);
+		fileData = "";
 	}
 	return (fileData);
 }
@@ -98,8 +98,11 @@ int	main(int argc, char **argv)
 		s2 = argv[3];
 		outputFileName = inputFileName + ".replace";
 		inputFileData = read_from_input(inputFileName);
-		outputFileData = find_and_replace(inputFileData, s1, s2);
-		write_to_file(outputFileData, outputFileName);
+		if (!inputFileData.empty())
+		{
+			outputFileData = find_and_replace(inputFileData, s1, s2);
+			write_to_file(outputFileData, outputFileName);
+		}
 	}
 	return (0);
 }
