@@ -7,6 +7,9 @@ std::string	PhoneBook::store_input(std::string input)
 	while (1)
 	{
 		std::getline(std::cin, input);
+		if (std::cin.eof()) {
+        	break;
+    	}
 		if (input.length() > 0)
 			break ;
 	}
@@ -30,6 +33,8 @@ void	PhoneBook::add_contact()
 	darkest_secret = store_input(darkest_secret);
 	contacts[index].set_contact(first_name,
 		last_name, nick_name, phone_number, darkest_secret);
+	if (max_index < SIZE)
+		++max_index;
 	index = (index + 1) % SIZE;
 }
 
@@ -58,13 +63,12 @@ std::string	PhoneBook::truncate_str(std::string str)
 
 void	PhoneBook::print_contacts()
 {
-	std::cout << "INDEX is " << index << std::endl;
 	std::cout << "     Index|first name| last name| nick name\n";
 	for (int i = 0; i < SIZE; ++i)
 	{
 		if (contacts[i].is_empty() == false)
 		{
-			std::cout << std::setw(10) << i << "|" <<
+			std::cout << std::setw(10) << i + 1 << "|" <<
 			truncate_str(contacts[i].get_fname()) << "|" <<
 			truncate_str(contacts[i].get_lname()) << "|" <<
 			truncate_str(contacts[i].get_nname()) << std::endl;
@@ -78,14 +82,17 @@ void	PhoneBook::search_contact()
 	int		num;
 
 	print_contacts();
-	std::cout << "Enter index from 1 to " << SIZE << " to retrieve data\n";
+	std::cout << "Enter index from 1 to " << max_index << " to retrieve data\n";
 	while (1)
 	{
 		std::getline(std::cin, input);
+		if (std::cin.eof()) {
+        	break;
+    	}
 		try
 		{
 			num = std::stoi(input);
-			if (num > SIZE || num < 1)
+			if (num > max_index || num < 1)
 				std::cerr << "The index is outside of the range we have. Retry." << std::endl;
 			else
 			{
@@ -112,6 +119,9 @@ void	PhoneBook::run_phb()
 		std::cout << "What would you like to do?\n";
 		std::cout << "1. Add\n2. Search\n3. Exit\n";
 		std::getline(std::cin, input);
+		if (std::cin.eof()) {
+        	break;
+    	}
 		for (std::size_t i = 0; i < input.length(); i++)
 		{
 			lower_input += (char)std::tolower(input[i]);

@@ -4,7 +4,7 @@
 #include "Contact.hpp"
 #include <iomanip>
 
-#define SIZE 3
+#define SIZE 8
 
 class PhoneBook
 {
@@ -19,6 +19,7 @@ class PhoneBook
 	
 	public:
 		PhoneBook();
+		int			max_index;
 		void	run_phb();
 };
 
