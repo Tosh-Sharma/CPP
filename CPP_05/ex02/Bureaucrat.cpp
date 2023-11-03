@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(): name(""), grade(150) {}
+Bureaucrat::Bureaucrat() {}
 
 Bureaucrat::~Bureaucrat() {}
 
@@ -61,4 +61,30 @@ void	Bureaucrat::decrementGrade()
 		++this->grade;
 	std::cout << "Grade of " << this->getName() << "decremented to "
 		<< this->getGrade() << std::endl;
+}
+
+void	Bureaucrat::signForm(Form & form)
+{
+	if (form.getGradeToSign() < this->getGrade())
+		std::cout << this->getName() << " couldn't sign " << form.getName()
+			<< " because his grade is too low" << std::endl;
+	else
+	{
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName()
+			<< std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(Form const & form)
+{
+	try {
+		form.action(*this);
+		std::cout << this->getName() << " executed " << form.getName()
+		<< std::endl;
+	} catch (std::exception & e)
+	{
+		std::cout << this->getName() << " couldn't execute " << form.getName()
+			<< " because " << e.what() << std::endl;
+	}
 }
