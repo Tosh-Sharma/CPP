@@ -32,4 +32,8 @@ int	main(void)
 	catch (std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}
+
+	Bureaucrat	*smartJack = new Bureaucrat("Smart Jack", 149);
+
+	Bureaucrat	*smartJill = new Bureaucrat("Jill", 2);
 }

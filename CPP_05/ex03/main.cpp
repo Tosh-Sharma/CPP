@@ -16,10 +16,11 @@ int main(void)
 	right.signForm(*form);
 	right.executeForm(*form);
 
+	Form *form2;
 	try {
-		form = intern.makeForm("SomethingRandomForm", "home");
-		right.signForm(*form);
-		right.executeForm(*form);
+		form2 = intern.makeForm("SomethingRandomForm", "home");
+		right.signForm(*form2);
+		right.executeForm(*form2);
 	} catch (std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}
