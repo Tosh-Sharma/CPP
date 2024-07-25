@@ -1,37 +1,29 @@
 #include "Form.hpp"
 
-Form::Form(): name(""), isSigned(false),
+Form::Form(): name("DummyForm"), isSigned(false),
 		gradeToSign(150), gradeToExecute(150) {}
 
 Form::~Form() {}
 
-Form::Form(Form & other)
+Form::Form(Form & other): name(other.name), isSigned(false),
+		gradeToSign(other.gradeToSign), gradeToExecute(other.gradeToExecute)
 {
-	(*this) = other;
+	std::cout << "Form copy constructor called" << std::endl;
 }
 
 Form & Form::operator=(Form & other)
 {
-	this->name = other.name;
-	this->isSigned = other.isSigned;
-	this->gradeToSign = other.gradeToSign;
-	this->gradeToExecute = other.gradeToExecute;
+	this->isSigned = false;
 	return (*this);
 }
 
-Form::Form(std::string const &name, int gradeToSign, int gradeToExecute)
+Form::Form(std::string const &name, int gradeToSign, int gradeToExecute): name(name), isSigned(false),
+		gradeToSign(gradeToSign), gradeToExecute(gradeToExecute)
 {
 	if (gradeToSign < 1 || gradeToExecute < 1)
 		throw GradeTooHighException();
 	else if (gradeToSign > 150 || gradeToExecute > 150)
 		throw GradeTooLowException();
-	else
-	{
-		this->name = name;
-		this->isSigned = false;
-		this->gradeToSign = gradeToSign;
-		this->gradeToExecute = gradeToExecute;
-	}
 }
 
 std::string const & Form::getName() const
@@ -56,6 +48,13 @@ int const & Form::getGradeToExecute() const
 
 void	Form::beSigned(Bureaucrat & bureaucrat)
 {
+	// Below lines are in case we want to throw an exception if the form is already signed
+	if (this->isSigned)
+	{
+		CannotSignException e;
+		throw e;
+	}
+
 	if (bureaucrat.getGrade() > this->gradeToSign)
 	{
 		GradeTooLowException e;

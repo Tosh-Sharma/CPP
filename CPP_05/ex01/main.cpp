@@ -21,4 +21,11 @@ int	main(void)
 		std::cout << e.what() << std::endl;
 	}
 	jim.signForm(form2);
+
+	try {
+		bob.signForm(form2);
+		bob.signForm(form2);
+	} catch(std::exception & e) {
+		std::cout << e.what() << std::endl;
+	}
 }
