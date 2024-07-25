@@ -35,8 +35,8 @@ Form * Intern::makeForm(std::string const & name, std::string const & target)
 
 	switch(hashit(name)) {
 		case eShrubberyCreationForm:
-		form = new ShrubberyCreationForm(target);
-		break;
+			form = new ShrubberyCreationForm(target);
+			break;
 		case eRobotomyRequestForm:
 			form = new RobotomyRequestForm(target);
 			break;
