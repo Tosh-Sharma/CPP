@@ -1,18 +1,27 @@
 #include "ShrubberyCreationForm.hpp"
 
+ShrubberyCreationForm::ShrubberyCreationForm(): Form("Default Shrubbery", 145, 137) {
+  this->target = "Default target";
+}
+
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(
 	ShrubberyCreationForm & other): Form(other) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target):
-	Form(target, "ShrubberyCreationForm", 145, 137) {}
+	Form("ShrubberyCreationForm", 145, 137), target(target) {}
 
 ShrubberyCreationForm & ShrubberyCreationForm::
 	operator=(ShrubberyCreationForm & other)
 {
 	this->Form::operator=(other);
 	return (*this);
+}
+
+std::string const & ShrubberyCreationForm::getTarget() const
+{
+	return (this->target);
 }
 
 void	ShrubberyCreationForm::action(Bureaucrat const & executor) const
