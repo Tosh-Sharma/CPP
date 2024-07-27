@@ -15,6 +15,9 @@ all:    ${NAME}
 ${NAME}: ${OBJS}
 		${CC} ${CFLAGS} -o ${NAME} ${OBJS}
 
+%.o: %.cpp
+		${CC} ${CFLAGS} -c $< -o $@
+
 clean:
 		@${RM} ${OBJS}
 

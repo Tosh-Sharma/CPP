@@ -11,7 +11,7 @@ Intern::Intern(Intern & other)
 
 Intern & Intern::operator=(Intern & other)
 {
-	(*this) = other;
+	(void)other;
 	return (*this);
 }
 

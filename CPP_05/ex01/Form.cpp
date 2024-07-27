@@ -13,6 +13,7 @@ Form::Form(Form & other): name(other.name), isSigned(false),
 
 Form & Form::operator=(Form & other)
 {
+	(void)other;
 	this->isSigned = false;
 	return (*this);
 }
