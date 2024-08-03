@@ -43,7 +43,9 @@ __/            \\__\n\
   \\/  \\    /  \\/\n\
       /_  _\\\n\
         \\/\n";
-  file.open(this->getTarget() + "_shruberry", std::ios::out);
+  std::string target = this->getTarget();
+  std::string _ext = "_shruberry";
+  file.open((this->getTarget() + _ext).c_str(), std::ios::out);
 
   if (!file) {
     std::cout << "Error in file creation!";
