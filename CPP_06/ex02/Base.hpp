@@ -1,12 +1,10 @@
 #pragma once
 
-#include <fstream>
 #include <iostream>
-#include <string>
 
 class Base{
 	private:
-		int var_base;
+		int id;
     public:
 	 	Base();
 		virtual ~Base();
