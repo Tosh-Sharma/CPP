@@ -1,28 +1,26 @@
-#include "Data.hpp"
-
-static uintptr_t serialize(Data* ptr) {
-	return reinterpret_cast<uintptr_t>(ptr);
-}
-
-static Data* deserialize(uintptr_t raw) {
-	return reinterpret_cast<Data*>(raw);
-}
+#include "Serializer.hpp"
 
 
 int main() {
-    Data data = Data(42, "Forty-Two");
+	Data pointer;
+	pointer.name = "I AM BATMAN";
+	pointer.id = 42;
 
-    uintptr_t raw = serialize(&data);
-    std::cout << "Serialized data is " << raw << std::endl;
+	std::cout << "OG Pointer address is: " << &pointer << std::endl;
+	std::cout << "Name is " << pointer.name << ", id is " << pointer.id << std::endl;
 
-    Data* deserializedPtr = deserialize(raw);
-	std::cout << "Values inside the data objects " << std::endl;
-	std::cout << "Data 1: " << data.getId() << ", " << data.getName() << std::endl;
-	std::cout << "Data 2: " << deserializedPtr->getId() << ", " << deserializedPtr->getName() << std::endl;
+	Serializer serializer;
+	uintptr_t raw_pointer = serializer.serialize(&pointer);
+	Data *original_pointer = serializer.deserialize(raw_pointer);
 
-	std::cout << "Addresses of the data objects " << std::endl;
-	std::cout << "Data for address 1" << &data << std::endl;
-	std::cout << "Data for address 2" << deserializedPtr << std::endl;
+	std::cout << "Re-Pointer address is : " << original_pointer << std::endl;
+	std::cout << "Name is " << original_pointer->name << ", id is " << original_pointer->id << std::endl;
+	std::cout << "Pointer address is: " << &pointer << std::endl;
+	std::cout << "Name is " << pointer.name << ", id is  " << pointer.id << std::endl;
+	std::cout << "Pointer address should be equal to Re-Pointer address." << std::endl;
+
+	std::cout << "Raw pointer is: " << &raw_pointer << std::endl;
+	std::cout << "Raw pointer should not be equal to original pointer." << std::endl;
 
     return 0;
 }
