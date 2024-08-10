@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <stdlib.h>
 #include <limits>
+#include <sstream>
 
 class ScalarConverter {
 	private:
@@ -41,6 +42,7 @@ class ScalarConverter {
 		bool	isInteger(const std::string& str);
 		bool	isFloat(const std::string& str);
 		bool	isDouble(const std::string& str);
+		int		stoi(std::string & input);
 
 		void	displayPseudoLiteralForDouble(std::string pseudoLiteral);
 		void	displayPseudoLiteralForFloat(std::string pseudoLiteral);

@@ -22,10 +22,23 @@ ScalarConverter::~ScalarConverter() {
 }
 
 std::string	ScalarConverter::appendSuffix() {
-	bool isInt = this->isInteger(this->originalInput);
-	if (isInt)
-		return (".0");
-	return ("");
+    size_t dotPos = this->originalInput.find('.');
+    if (dotPos != std::string::npos) {
+        std::string afterDot = this->originalInput.substr(dotPos + 1);        
+        bool allZeros = true;
+        for (size_t i = 0; i < afterDot.length(); ++i) {
+            if (afterDot[i] != '0' && afterDot[i] != 'f') {
+                allZeros = false;
+                break;
+            }
+        }
+        if (allZeros) {
+            return ".0";
+        } else {
+            return "";
+        }
+    }
+    return ".0";
 }
 
 void	ScalarConverter::displayPseudoLiteralForFloat(std::string pseudoLiteral) {
@@ -59,7 +72,10 @@ bool ScalarConverter::isInteger(const std::string& str)
 	}
 	for (; i < str.length(); ++i) {
 		if (!isdigit(str[i]))
+		{
 			result = false;
+			break ;
+		}
 	}
 	return result;
 }
@@ -133,7 +149,11 @@ void	ScalarConverter::handleInt() {
 void	ScalarConverter::handleFloat() {
 	this->convertToChar();
 	std::cout << "int: " << this->intInput << std::endl;
-	std::cout << "float: " << this->floatInput << "f" << std::endl;
+	if (this->intInput == this->floatInput) {
+		std::cout << "float: " << this->floatInput << ".0f" << std::endl;
+	} else {
+		std::cout << "float: " << this->floatInput << this->appendSuffix() << "f" << std::endl;
+	}
 	std::cout << "double: " << this->doubleInput << this->appendSuffix() << std::endl;
 }
 
@@ -144,19 +164,26 @@ void	ScalarConverter::handleDouble() {
 	std::cout << "double: " << this->doubleInput << this->appendSuffix() << std::endl;
 }
 
+int	ScalarConverter::stoi(std::string & input) {
+	int i;
+
+	std::istringstream(input) >> i;
+	return i;
+}
+
 void	ScalarConverter::handleNumbers() {
 	if (isInteger(this->originalInput)) {
-		this->intInput = std::stoi(this->originalInput);
+		this->intInput = this->stoi(this->originalInput);
 		this->floatInput = static_cast<float>(this->intInput);
 		this->doubleInput = static_cast<double>(this->intInput);
 		this->handleInt();
 	} else if (isFloat(this->originalInput)) {
-		this->floatInput = std::stof(this->originalInput);
+		this->floatInput = std::atof(this->originalInput.c_str());
 		this->intInput = static_cast<int>(this->floatInput);
 		this->doubleInput = static_cast<double>(this->floatInput);
 		this->handleFloat();
 	} else if (isDouble(this->originalInput)) {
-		this->doubleInput = std::stod(this->originalInput);
+		this->doubleInput = std::atof(this->originalInput.c_str());
 		this->intInput = static_cast<int>(this->doubleInput);
 		this->floatInput = static_cast<float>(this->doubleInput);
 		this->handleDouble();
