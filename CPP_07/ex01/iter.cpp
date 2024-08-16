@@ -1,4 +1,4 @@
-#include "whatever.hpp"
+#include "iter.hpp"
 
 NumberClass::NumberClass() : number(0) {}
 
@@ -9,6 +9,7 @@ NumberClass & NumberClass::operator= (NumberClass & num)
 	number = num.getNumber();
 	return *this; 
 }
+
 NumberClass::~NumberClass() {}
 
 int NumberClass::getNumber() const {

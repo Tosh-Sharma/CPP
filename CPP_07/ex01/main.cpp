@@ -1,40 +1,29 @@
-#include <iostream>
-#include <iterator>
-#include <vector>
-using namespace std;
+#include "iter.hpp"
 
-vector<int> iter[5];
-
-void insertingInArrayofVector()
-{
-    for (int i = 0; i < 5; i++)
-    {
-        for (int j = i + 1; j < 5; j++)
-        {
-            iter[i].push_back(j);
-        }
-    }
+void    increment(int &n) {
+    ++n;
 }
 
-void printElement()
-{
-    for (int i = 0; i < 5; i++)
-    {
-        cout << "Elements at index " << i << ": ";
-        for (auto it = iter[i].begin(); it != iter[i].end(); it++)
-        {
-            cout << *it << ' ';
-        }
-        cout << endl;
-    }
-}
+int main() {
+    int array[] = { 100, 101, 102, 103, 104 };
+    iter(array, 5, increment);
+    iter(array, 5, display);
 
-void arrayOfVector(){
-    insertingInArrayofVector();
-    printElement(); 
-}
+    std::cout << "\n";
 
-int main(){
-    arrayOfVector();
+	char a[] = {'A', 'B', 'C'};
+    iter(a, 3, display);
+
+    std::cout << "\n";
+
+    NumberClass numbers[5] = {
+        NumberClass(22),
+        NumberClass(33),
+        NumberClass(44),
+        NumberClass(55),
+        NumberClass(66)
+    };
+
+    iter(numbers, 5, display);
     return 0;
 }
