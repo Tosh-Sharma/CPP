@@ -7,7 +7,7 @@ NumberClass::NumberClass(int number) : number(number) {}
 NumberClass & NumberClass::operator= (NumberClass & num)
 {
 	number = num.getNumber();
-	return *this; 
+	return *this;
 }
 
 NumberClass::~NumberClass() {}

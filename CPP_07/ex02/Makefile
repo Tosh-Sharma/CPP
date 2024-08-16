@@ -1,15 +1,15 @@
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
+CFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 RM		= rm -f
 NAME	= output
-SRCS	= main.cpp iter.cpp
+SRCS	= main.cpp
 
 OBJS=${SRCS:.cpp=.o}
 
 all:    ${NAME}
 
 ${NAME}:        ${OBJS}
-		${CC} ${CFLAGS} -o ${NAME} ${OBJS}
+		${CC} ${CFLAGS} -I Array.tpp -o ${NAME} ${OBJS}
 
 %.o: %.cpp
 		${CC} ${CFLAGS} -c $< -o $@
