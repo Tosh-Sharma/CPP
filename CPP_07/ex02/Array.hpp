@@ -1,14 +1,12 @@
 #pragma once
 
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
 
 template <typename T>
 class Array
 {
 	private:
-		T		*array;
+		T				*array;
 		unsigned int	length;
 
 	public:
@@ -20,7 +18,6 @@ class Array
 		Array &		operator=(const Array & copy);
 		T &			operator[](unsigned int index);
 		const T &	operator[](unsigned int index) const;
-
 		unsigned int	size()	const;
 
 		class IndexOutOfBoundsException: public std::exception {
@@ -31,7 +28,7 @@ class Array
 		};
 };
 
-#include "Array.tpp"
-
 template <typename T>
 std::ostream & operator<<(std::ostream & o, const Array<T> &array);
+
+#include "Array.tpp"

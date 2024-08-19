@@ -78,8 +78,10 @@ std::ostream & operator<<(std::ostream & o, const Array<T> &array) {
 	unsigned int iterator = 0;
 	o << "Elements of Array:\t";
 	for (; iterator < array.size(); ++iterator) {
-		o << array[iterator] << " ";
+		if (iterator == array.size() - 1)
+			o << array[iterator] << ".\n";
+		else
+			o << array[iterator] << ", ";
 	}
-	o << std::endl;
 	return o;
 }
