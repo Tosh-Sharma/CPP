@@ -39,5 +39,3 @@ typename T::iterator easyfind(T &reference, int value)
 // Above throw errors that are commented out are for templating to catch unknown errors 
 // being thrown. 
 // If needed, we can remove the try-catch block and uncomment the throws.
-
-// Also, if needed, we can import // #include <bits/stdc++.h> for Linux.

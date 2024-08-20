@@ -15,7 +15,7 @@ Span::Span(unsigned int N) : size(N)
 	std::cout << "Span of size " << N << " created" << std::endl;
 }
 
-Span::Span(const Span& other)
+Span::Span(const Span & other)
 {
 	(*this) = other;
 }

@@ -2,9 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
-#include <cmath>
 #include <vector>
-#include <list>
 
 typedef std::vector<int>::iterator	Iter;
 
