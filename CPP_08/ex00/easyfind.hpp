@@ -4,11 +4,11 @@
 #include <list>
 #include <iostream>
 
-class NotFoundException : public std::exception
+class NotFoundException: public std::exception
 {
 	public:
 		virtual const char* what() const throw() {
-			return "Given value not found\n";
+			return "Given value was not found\n";
 		}
 };
 
