@@ -15,7 +15,7 @@ void fordJohnSonForDeque(std::deque<int> &inputDeque)
 	result = (secondsDiff * 1000000) + microSecondsDiff;
 
 	std::cout << "After:\t";
-	if (inputDeque.size() > 100) {
+	if (inputDeque.size() > 4) {
 		for (int i = 0; i < 4; i++)
 			std::cout << inputDeque[i] << " ";
 		std::cout << "[...]";
@@ -29,37 +29,37 @@ void fordJohnSonForDeque(std::deque<int> &inputDeque)
 			<< " elements with std::deque : " << result  << " μs" << std::endl;
 }
 
-// void fordJohnSonForList(std::list<int> &inputList)
-// {
-// 	PmergeMe		pmergeme;
-// 	struct timeval	start, end;
-// 	long			sec, micro, result;
+void fordJohnSonForList(std::list<int> &inputList)
+{
+	PmergeMe		pmergeme;
+	struct timeval	start, end;
+	long			sec, micro, result;
 
-// 	gettimeofday(&start, NULL);
+	gettimeofday(&start, NULL);
 
-// 	pmergeme.fordJohnsonMergeSort(inputList);
-// 	gettimeofday(&end, NULL);
+	pmergeme.mergeInsertionSort(inputList);
+	gettimeofday(&end, NULL);
 
-// 	// Subject does not require this but its good for testing.
-// 	// std::cout << "After:\t";
-// 	// if (inputList.size() > 4) {
-// 	// 	int count = 0;
-// 	// 	for (std::list<int>::iterator it = inputList.begin(); it != inputList.end() && count < 4; ++it, ++count)
-// 	// 		std::cout << *it << " ";
-// 	// 	std::cout << "[...]";
-// 	// }
-// 	// else {
-// 	// 	for (std::list<int>::iterator it = inputList.begin(); it != inputList.end(); ++it)
-// 	// 		std::cout << *it << " ";
-// 	// }
+	// Subject does not require this but its good for testing.
+	// std::cout << "After:\t";
+	// if (inputList.size() > 4) {
+	// 	int count = 0;
+	// 	for (std::list<int>::iterator it = inputList.begin(); it != inputList.end() && count < 4; ++it, ++count)
+	// 		std::cout << *it << " ";
+	// 	std::cout << "[...]";
+	// }
+	// else {
+	// 	for (std::list<int>::iterator it = inputList.begin(); it != inputList.end(); ++it)
+	// 		std::cout << *it << " ";
+	// }
 
-// 	sec = end.tv_sec - start.tv_sec;
-// 	micro = end.tv_usec - start.tv_usec;
-// 	result = (sec * 1000000) + micro;
+	sec = end.tv_sec - start.tv_sec;
+	micro = end.tv_usec - start.tv_usec;
+	result = (sec * 1000000) + micro;
 
-// 	std::cout << "\nTime to process a range of " << inputList.size()
-// 			<< " elements with std::list : " << result  << " μs" << std::endl;
-// }
+	std::cout << "Time to process a range of " << inputList.size()
+			<< " elements with std::list : " << result  << " μs" << std::endl;
+}
 
 int main(int argc, char *argv[])
 {
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 		std::cout << std::endl;
 
 	fordJohnSonForDeque(inputDeque);
-	// fordJohnSonForList(inputList);
+	fordJohnSonForList(inputList);
 
 	return 0;
 }

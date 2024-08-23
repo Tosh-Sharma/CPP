@@ -16,9 +16,11 @@ class PmergeMe
         PmergeMe(const PmergeMe & other);
         PmergeMe & operator=(const PmergeMe & other);
 
-		std::deque<int>	generateJacobsthal(int n);
+		void	mergeInsertionSort(std::deque<int>& inputDeque);
+		void	insertIntoMainSequence(std::deque<int>& mainSequence, int value, int end);
+		int		binarySearch(const std::deque<int>& mainSequence, int value, int end);
 
-		int		binarySearch(const std::deque<int>& main_chain, int b, int end);
-		void	insertIntoMainSequence(std::deque<int>& main_chain, int b, int end);
-		void	mergeInsertionSort(std::deque<int>& vec);
+        void    mergeInsertionSort(std::list<int>& inputList);
+        void    insertIntoMainSequence(std::list<int>& mainSequence, int value, int end);
+        int     binarySearch(const std::list<int>& mainSequence, int value, int end);
 };

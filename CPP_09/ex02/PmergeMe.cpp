@@ -15,23 +15,13 @@ PmergeMe & PmergeMe::operator=(const PmergeMe &other)
 	return (*this);
 }
 
-std::deque<int> PmergeMe::generateJacobsthal(int size) {
-	std::deque<int>	jacobsthal;
-
-	jacobsthal.push_back(1);
-	int i = 3;
-
-	while (i <= size) {
-		jacobsthal.push_back(i);
-		i = 2 * jacobsthal[jacobsthal.size() - 1] + 1;
-	}
-	return jacobsthal;
-}
-
 int PmergeMe::binarySearch(const std::deque<int>& mainSequence, int value, int end) {
-	int	left = 0, right = end;
+	int	left;
+	int	right;
 
-	while (left < right) {
+	left = 0;
+	right = end;
+	while(left < right) {
 		int mid = left + (right - left) / 2;
 		if (mainSequence[mid] < value) {
 			left = mid + 1;
@@ -43,32 +33,35 @@ int PmergeMe::binarySearch(const std::deque<int>& mainSequence, int value, int e
 }
 
 void PmergeMe::insertIntoMainSequence(std::deque<int>& mainSequence, int value, int end) {
-	int pos = binarySearch(mainSequence, value, end);
-	mainSequence.insert(mainSequence.begin() + pos, value);
+	int	position;
+
+	position = binarySearch(mainSequence, value, end);
+	mainSequence.insert(mainSequence.begin() + position, value);
 }
 
 void PmergeMe::mergeInsertionSort(std::deque<int>& inputDeque) {
-	std::deque<std::pair<int, int> > pairs;
-
-	std::deque<int>	mainSequence;
-	std::deque<int> secondSequence;
-	std::deque<int> jacobsthal;
-	size_t			iterator = 0;
+	std::deque<std::pair<int, int> >	pairs;
+	std::deque<int>						mainSequence;
+	std::deque<int> 					secondSequence;
+	size_t								iterator = 0;
 
 	if (inputDeque.size() <= 1) {
 		return;
 	}
 	// Create pairs of elements. {Step 1}
-	for ( ;iterator + 1 < inputDeque.size(); iterator += 2) {
+	for ( ;iterator + 1 < inputDeque.size(); iterator += 2)
+	{
 		if (inputDeque[iterator] > inputDeque[iterator + 1]) {
-			pairs.push_back(std::make_pair(inputDeque[iterator + 1], inputDeque[iterator]));
+			pairs.push_back(std::make_pair(inputDeque[iterator + 1],
+					inputDeque[iterator]));
 		} else {
-			pairs.push_back(std::make_pair(inputDeque[iterator], inputDeque[iterator + 1]));
+			pairs.push_back(std::make_pair(inputDeque[iterator],
+					inputDeque[iterator + 1]));
 		}
 	}
 
-	iterator = 0;
 	// Create a main sequence and a second sequence. {Step 2}
+	iterator = 0;
 	for (; iterator < pairs.size(); ++iterator) {
 		mainSequence.push_back(pairs[iterator].first);
 		secondSequence.push_back(pairs[iterator].second);
@@ -76,14 +69,85 @@ void PmergeMe::mergeInsertionSort(std::deque<int>& inputDeque) {
 	if (inputDeque.size() % 2 == 1) {
 		mainSequence.push_back(inputDeque.back());
 	}
-	// Sort the main sequence out recursively. {Step 4}
+
+	// Sort the main sequence recursively. {Step 4}
 	this->mergeInsertionSort(mainSequence);
 
-	jacobsthal = generateJacobsthal(secondSequence.size());
 	iterator = 0;
-	// Insert the second sequence into the main sequence. {Step 5}
+	// Insert the second sequence into the main sequence using binary search. {Step 5}
 	for ( ; iterator < secondSequence.size(); ++iterator) {
-		insertIntoMainSequence(mainSequence, secondSequence[iterator], mainSequence.size());
+		insertIntoMainSequence(mainSequence, secondSequence[iterator],
+			mainSequence.size());
 	}
 	inputDeque = mainSequence;
+}
+
+// Ford Johnson Algorithm for std::list
+
+int PmergeMe::binarySearch(const std::list<int>& mainSequence, int value, int end) {
+    int left = 0;
+    int right = end;
+    std::list<int>::const_iterator it = mainSequence.begin();
+
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        std::advance(it, mid - left);
+        if (*it < value) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+        it = mainSequence.begin();
+        std::advance(it, left);
+    }
+    return left;
+}
+
+void PmergeMe::insertIntoMainSequence(std::list<int>& mainSequence, int value, int end) {
+    int position = binarySearch(mainSequence, value, end);
+    std::list<int>::iterator it = mainSequence.begin();
+    std::advance(it, position);
+    mainSequence.insert(it, value);
+}
+
+void PmergeMe::mergeInsertionSort(std::list<int>& inputList) {
+    std::list<std::pair<int, int> > pairs;
+    std::list<int> mainSequence;
+    std::list<int> secondSequence;
+    std::list<int>::iterator it = inputList.begin();
+
+    if (inputList.size() <= 1) {
+        return;
+    }
+    // Create pairs of elements. {Step 1}
+    while (it != inputList.end()) {
+        int first = *it;
+        ++it;
+        if (it != inputList.end()) {
+            int second = *it;
+            ++it;
+            if (first > second) {
+                pairs.push_back(std::make_pair(second, first));
+            } else {
+                pairs.push_back(std::make_pair(first, second));
+            }
+        } else {
+            mainSequence.push_back(first);
+        }
+    }
+
+    // Create a main sequence and a second sequence. {Step 2}
+    for (std::list<std::pair<int, int> >::iterator pairIt = pairs.begin(); pairIt != pairs.end(); ++pairIt) {
+        mainSequence.push_back(pairIt->first);
+        secondSequence.push_back(pairIt->second);
+    }
+
+    // Sort the main sequence recursively. {Step 4}
+    this->mergeInsertionSort(mainSequence);
+
+    // Insert the second sequence into the main sequence using binary search. {Step 5}
+    for (std::list<int>::iterator secondIt = secondSequence.begin(); secondIt != secondSequence.end(); ++secondIt) {
+        insertIntoMainSequence(mainSequence, *secondIt, mainSequence.size());
+    }
+    inputList = mainSequence;
 }
