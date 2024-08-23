@@ -2,7 +2,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -f
 NAME	= PmergeMe
-SRCS	= main2.cpp PmergeMe2.cpp
+SRCS	= main.cpp PmergeMe.cpp
 
 OBJS=${SRCS:.cpp=.o}
 

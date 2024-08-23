@@ -15,136 +15,75 @@ PmergeMe & PmergeMe::operator=(const PmergeMe &other)
 	return (*this);
 }
 
-// Ford johnson algorithm for deque
-void PmergeMe::fordJohnsonMergeSort(std::deque<int>& deque) {
-    std::deque<int> sortedDeque;
-    
-    if (deque.size() <= 1) {
-        return ;
-    }    
-    fordJohnsonMergeSortUtil(deque, sortedDeque);
-    deque = sortedDeque;
+std::deque<int> PmergeMe::generateJacobsthal(int size) {
+	std::deque<int>	jacobsthal;
+
+	jacobsthal.push_back(1);
+	int i = 3;
+
+	while (i <= size) {
+		jacobsthal.push_back(i);
+		i = 2 * jacobsthal[jacobsthal.size() - 1] + 1;
+	}
+	return jacobsthal;
 }
 
-void PmergeMe::fordJohnsonMergeSortUtil(std::deque<int>& deque, std::deque<int>& result) {
-    std::deque<int> sortedSmaller;
-    std::deque<int> sortedLarger;
-    std::deque<int> smaller;
-    std::deque<int> larger;
+int PmergeMe::binarySearch(const std::deque<int>& mainSequence, int value, int end) {
+	int	left = 0, right = end;
 
-    if (deque.size() <= 1) {
-        result = deque;
-        return ;
-    }
-    for (size_t i = 0; i < deque.size(); i += 2) {
-        if (i + 1 < deque.size()) {
-            if (deque[i] < deque[i + 1]) {
-                smaller.push_back(deque[i]);
-                larger.push_back(deque[i + 1]);
-            } else {
-                smaller.push_back(deque[i + 1]);
-                larger.push_back(deque[i]);
-            }
-        } else {
-            smaller.push_back(deque[i]);
-        }
-    }
-    fordJohnsonMergeSortUtil(smaller, sortedSmaller);
-    fordJohnsonMergeSortUtil(larger, sortedLarger);
-    merge(sortedSmaller, sortedLarger, result);
+	while (left < right) {
+		int mid = left + (right - left) / 2;
+		if (mainSequence[mid] < value) {
+			left = mid + 1;
+		} else {
+			right = mid;
+		}
+	}
+	return left;
 }
 
-void PmergeMe::merge(std::deque<int>& left, std::deque<int>& right, std::deque<int>& mergeDeque) {
-    std::deque<int>::iterator itLeft = left.begin();
-    std::deque<int>::iterator itRight = right.begin();
-    std::deque<int>::iterator itLeftEnd = left.end();
-    std::deque<int>::iterator itRightEnd = right.end();
-
-    while (itLeft != itLeftEnd && itRight != itRightEnd) {
-        if (*itLeft <= *itRight) {
-            mergeDeque.push_back(*itLeft);
-            ++itLeft;
-        } else {
-            mergeDeque.push_back(*itRight);
-            ++itRight;
-        }
-    }
-    while (itLeft != itLeftEnd) {
-        mergeDeque.push_back(*itLeft);
-        ++itLeft;
-    }
-    while (itRight != itRightEnd) {
-        mergeDeque.push_back(*itRight);
-        ++itRight;
-    }
+void PmergeMe::insertIntoMainSequence(std::deque<int>& mainSequence, int value, int end) {
+	int pos = binarySearch(mainSequence, value, end);
+	mainSequence.insert(mainSequence.begin() + pos, value);
 }
 
-// Ford johnson algorithm for std::list
-void PmergeMe::fordJohnsonMergeSort(std::list<int>& lst) {
-    std::list<int> sortedList;
-    
-    if (lst.size() <= 1) {
-        return;
-    }    
-    fordJohnsonMergeSortUtil(lst, sortedList);
-    lst = sortedList;
-}
+void PmergeMe::mergeInsertionSort(std::deque<int>& inputDeque) {
+	std::deque<std::pair<int, int> > pairs;
 
-void PmergeMe::fordJohnsonMergeSortUtil(std::list<int>& lst, std::list<int>& result) {
-    std::list<int> sortedSmaller;
-    std::list<int> sortedLarger;
-    std::list<int> smaller;
-    std::list<int> larger;
+	std::deque<int>	mainSequence;
+	std::deque<int> secondSequence;
+	std::deque<int> jacobsthal;
+	size_t			iterator = 0;
 
-    if (lst.size() <= 1) {
-        result = lst;
-        return;
-    }
-    
-    std::list<int>::iterator it = lst.begin();
-    while (it != lst.end()) {
-        std::list<int>::iterator next = it;
-        ++next;
-        if (next != lst.end()) {
-            if (*it < *next) {
-                smaller.push_back(*it);
-                larger.push_back(*next);
-            } else {
-                smaller.push_back(*next);
-                larger.push_back(*it);
-            }
-            ++it;
-        } else {
-            smaller.push_back(*it);
-        }
-        ++it;
-    }
-    fordJohnsonMergeSortUtil(smaller, sortedSmaller);
-    fordJohnsonMergeSortUtil(larger, sortedLarger);
-    merge(sortedSmaller, sortedLarger, result);
-}
+	if (inputDeque.size() <= 1) {
+		return;
+	}
+	// Create pairs of elements. {Step 1}
+	for ( ;iterator + 1 < inputDeque.size(); iterator += 2) {
+		if (inputDeque[iterator] > inputDeque[iterator + 1]) {
+			pairs.push_back(std::make_pair(inputDeque[iterator + 1], inputDeque[iterator]));
+		} else {
+			pairs.push_back(std::make_pair(inputDeque[iterator], inputDeque[iterator + 1]));
+		}
+	}
 
-void PmergeMe::merge(std::list<int>& left, std::list<int>& right, std::list<int>& mergeList) {
-    std::list<int>::iterator itLeft = left.begin();
-    std::list<int>::iterator itRight = right.begin();
-    std::list<int>::iterator itLeftEnd = left.end();
-    std::list<int>::iterator itRightEnd = right.end();
+	iterator = 0;
+	// Create a main sequence and a second sequence. {Step 2}
+	for (; iterator < pairs.size(); ++iterator) {
+		mainSequence.push_back(pairs[iterator].first);
+		secondSequence.push_back(pairs[iterator].second);
+	}
+	if (inputDeque.size() % 2 == 1) {
+		mainSequence.push_back(inputDeque.back());
+	}
+	// Sort the main sequence out recursively. {Step 4}
+	this->mergeInsertionSort(mainSequence);
 
-    while (itLeft != itLeftEnd && itRight != itRightEnd) {
-        if (*itLeft <= *itRight) {
-            mergeList.push_back(*itLeft);
-            ++itLeft;
-        } else {
-            mergeList.push_back(*itRight);
-            ++itRight;
-        }
-    }
-    while (itLeft != itLeftEnd) {
-        mergeList.push_back(*itLeft);
-        ++itLeft;
-    }
-    while (itRight != itRightEnd) {
-        mergeList.push_back(*itRight);
-        ++itRight;
-    }
+	jacobsthal = generateJacobsthal(secondSequence.size());
+	iterator = 0;
+	// Insert the second sequence into the main sequence. {Step 5}
+	for ( ; iterator < secondSequence.size(); ++iterator) {
+		insertIntoMainSequence(mainSequence, secondSequence[iterator], mainSequence.size());
+	}
+	inputDeque = mainSequence;
 }
