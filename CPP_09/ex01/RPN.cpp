@@ -60,6 +60,8 @@ void	RPN::setInput(const char *charInput)
 
 int	RPN::getNumberFromStack()
 {
+	if (this->numberStack.empty())
+		throw std::exception();
 	int value = this->numberStack.top();
 	this->numberStack.pop();
 	return value;
@@ -70,10 +72,17 @@ void	RPN::evaluatePostfix()
 	unsigned int iterator = 0;
 	for (; iterator < this->input.size(); ++iterator) {
 		if (isdigit(this->input[iterator]))
-			this->numberStack.push(this->input[iterator] - '0');
+		{
+			int number = this->input[iterator] - '0';
+			this->numberStack.push(number);
+		}
 		else {
 			int alpha = getNumberFromStack();
 			int beta = getNumberFromStack();
+			if (alpha == 0 && this->input[iterator] == '/')
+			{
+				throw std::exception();
+			}
 			switch (this->input[iterator])
 			{
 				case '+':
@@ -92,6 +101,8 @@ void	RPN::evaluatePostfix()
 		}
 	}
 	this->result = getNumberFromStack();
+	if (!this->numberStack.empty())
+		throw std::exception();
 }
 
 int		RPN::getResult() const

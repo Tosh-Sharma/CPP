@@ -77,22 +77,28 @@ void BitcoinExchange::setAllRates()
 
 	if (!file.is_open()) {
 		std::cout << "Error opening file: data.csv " << std::endl;
-		return;
+		return ;
 	}
 	std::getline(file, line);	// Skip the first line as its a header line
 	while (std::getline(file, line)) {
 		std::vector<std::string> splitString = this->split(line, ',');
 		if (splitString.size() == 2) {
 			std::string date = this->trim(splitString[0]);
-			std::string valueString = this->trim(splitString[1]);
-			std::istringstream valueStream(valueString);
-			std::string formattedDate = formatDateToYYYYMMDD(date);
-			double	value;
-			if (valueStream >> value) {
-				this->rate.insert(std::make_pair(formattedDate, value));
+			if (isValidDate(date)) {
+				std::string valueString = this->trim(splitString[1]);
+				std::istringstream valueStream(valueString);
+				std::string formattedDate = formatDateToYYYYMMDD(date);
+				double	value;
+				if (valueStream >> value) {
+					this->rate.insert(std::make_pair(formattedDate, value));
+				} else {
+					std::cout << "Invalid value: " << splitString[1] << " on date: " << date << std::endl;
+				}
 			} else {
-				std::cout << "Invalid value: " << splitString[1] << " on date: " << date << std::endl;
+				std::cout << "Error: Invalid date as input => " << date << std::endl;
 			}
+		} else {
+			std::cout << "Invalid line: " << line << std::endl;
 		}
 	}
 	file.close();
@@ -101,13 +107,21 @@ void BitcoinExchange::setAllRates()
 void BitcoinExchange::run(const char *filename)
 {
 	setAllRates();
+	int size = this->rate.size();
+	if (size == 0) {
+		std::cout << "Error: no rates found." << std::endl;
+		return ;
+	}
 	this->iterateOverFile(filename);
 }
 
 bool	BitcoinExchange::isValidDate(std::string date)
 {
-	int	year, month, day;
+	int	year = 0, month = 0, day = 0;
 	std::string	fulldate;
+
+	if (date.length() != 10)
+		return false;
 
 	std::vector<std::string> v = this->split(date, '-');
 	try {
@@ -126,10 +140,11 @@ bool	BitcoinExchange::isValidDate(std::string date)
 	int	monthSizes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	if (isLeapYear)
 		monthSizes[1] = 29;
-
 	if (day < 1 || day > monthSizes[month - 1])
 		return false;
 	if (month < 1 || month > 12)
+		return false;
+	if (year < 2009 || year > 2024)
 		return false;
 	
 	return true;
